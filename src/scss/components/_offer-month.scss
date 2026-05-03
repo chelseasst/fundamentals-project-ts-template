@@ -1,0 +1,94 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+.offer-month-section {
+    padding: 4rem 2rem;
+}
+
+.offer-banner {
+    width: 100%;
+
+    @include flex(column, null, null, 2rem);
+
+    margin: 0 auto;
+    color: $color-white;
+    background: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 70%)), url('./assets/offer-back.png'); // your image path
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem 1rem;
+}
+
+.offer-percent {
+    position: relative;
+    flex: 0 0 calc(50% - 1rem)
+}
+
+.offer-content {
+    @include flex(column, null, null, 1rem);
+
+    flex: 0 0 calc(50% - 1rem);
+}
+
+.percent {
+    display: block;
+    font-size: 100px;
+    font-weight: 900;
+}
+
+.percent-desc {
+    position: relative;
+}
+
+@media (width >= 768px) {
+    .offer-month-section {
+        padding: 4rem 2.5rem;
+    }
+
+    .offer-banner {
+        height: 300px;
+
+        @include flex(row, center, null, 2rem);
+
+        padding: 3rem 2rem;
+    }
+
+    .percent-desc {
+        top: -2rem;
+    }
+}
+
+@media (width >= 1440px) {
+    .offer-month-section {
+        padding: 4rem 6rem;
+    }
+
+    .offer-banner {
+        height: 407px;
+        padding: 3.5rem 3rem;
+
+        @include flex(row, center, null, 5rem);
+
+        gap: 5rem;
+    }
+
+    .offer-content {
+        @include flex(column, null, null, 2rem);
+    }
+
+    .offer-percent {
+        flex: 0 0 calc(50% - 2.5rem)
+    }
+
+    .offer-content {
+        flex: 0 0 calc(50% - 2.5rem)
+    }
+
+    .percent {
+        font-size: 223px;
+    }
+
+    .percent-desc {
+        top: -3.5rem;
+    }
+}

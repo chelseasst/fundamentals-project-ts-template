@@ -1,0 +1,157 @@
+@use "../base/fonts" as *;
+@use '../abstracts/mixins' as *;
+
+
+.our-benefits-back {
+  background-color: rgb(56 56 56);
+}
+
+.our-benefits,
+.footer-content,
+.footer-copyright {
+  padding: 2rem;
+
+  p,
+  li,
+  a {
+    font-size: 0.9rem;
+  }
+
+  li:nth-child(1),
+  .title {
+    padding-bottom: 0.5rem;
+    font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.our-benefits {
+  color: $color-white;
+
+  .title {
+    padding-bottom: 1.5rem;
+  }
+}
+
+.benefits-container {
+  @include flex(column, center, center, 1.5rem);
+
+  .benefit {
+    @include flex(row, center, null, 1.5rem);
+  }
+
+  img {
+    width: 40px;
+  }
+}
+
+.footer-content {
+  @include flex(column, null, null, 2rem);
+
+  .categories {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .contact-us {
+    flex: 0 0 35%;
+
+    .expl {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .contacts {
+    display: grid;
+    gap: 1rem;
+
+    i {
+      font-size: 1.4rem;
+      color: $color-high;
+    }
+  }
+
+  .contacts>div {
+    @include flex(row, center, null, 1rem);
+  }
+}
+
+.footer-copyright {
+  p {
+    color: rgb(0 0 0.35);
+    text-align: center;
+  }
+}
+
+@media (width >=768px) {
+  .our-benefits,
+  .footer-content,
+  .footer-copyright {
+    padding: 2.5rem;
+  }
+
+  .benefits-container {
+    @include flex(row, center, center, 1.5rem);
+  }
+
+  .footer-content {
+    @include flex(row, null, space-between, 2rem);
+
+
+    .about {
+      grid-area: about;
+    }
+
+    .links {
+      grid-area: links;
+    }
+
+    .achievements {
+      grid-area: achievements;
+    }
+
+    .shipping {
+      grid-area: shipping;
+    }
+
+    .categories {
+      flex: 0 0 60%;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "about links achievements"
+        "shipping shipping shipping";
+    }
+  }
+}
+
+@media (width >=1440px) {
+  .our-benefits,
+  .footer-content,
+  .footer-copyright {
+    padding: 4rem 6rem;
+  }
+
+  .benefits-container {
+    img {
+      width: 60px;
+    }
+  }
+
+  .footer-content {
+    .categories {
+      flex: 0 0 50%;
+    }
+
+    .contacts {
+      grid-template-columns: repeat(2, 1fr);
+
+      i {
+        width: 24px;
+      }
+    }
+  }
+}

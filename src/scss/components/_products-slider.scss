@@ -1,0 +1,27 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+
+.products-slider {
+  max-width: 100%;
+
+  @include flex(row, null, null, 1rem);
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  .product {
+    flex: 0 0 23%;
+  }
+}
+
+.products-slider::-webkit-scrollbar {
+  display: none;
+}
+
+@media (width >= 1440px) {
+  .products-slider {
+    @include flex(row, null, null, 2rem);
+  }
+}

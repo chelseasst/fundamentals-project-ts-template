@@ -1,0 +1,42 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+.categories-section {
+    padding: 4rem 2rem;
+
+    @include flex(column, null, null, 2rem);
+
+    .category {
+        flex: 1;
+
+        @include flex(column, center, center, 1rem);
+
+        .title {
+            font-weight: 700;
+        }
+
+        img {
+            background-color: $color-high;
+            color: $color-white;
+            width: 62px;
+            height: 62px;
+
+            @include flex(row, center, center, null);
+        }
+    }
+}
+
+@media (width >= 768px) {
+    .categories-section {
+        padding: 4rem 2.5rem;
+
+        @include flex(row, baseline, space-between, 2rem);
+    }
+
+}
+
+@media (width >= 1440px) {
+    .categories-section {
+        padding: 4rem 6rem;
+    }
+}

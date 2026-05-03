@@ -1,0 +1,61 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+
+.home-grateful-customers-section {
+    padding: 4rem 2rem;
+}
+
+.customers-slider {
+    padding: 1.5rem;
+    max-width: 100%;
+
+    @include flex(row, null, null, 1rem);
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    .customer {
+        flex: 0 0 90%;
+
+        @include flex(column, center, null, 1rem);
+
+        padding: 1rem;
+        box-shadow: 0 0 10px 3px rgb(75 75 75 / 20%);
+
+        .name-city {
+            color: $color-high;
+            font-weight: 700;
+        }
+    }
+}
+
+.customers-slider::-webkit-scrollbar {
+    display: none;
+}
+
+@media (width >= 768px) {
+    .home-grateful-customers-section {
+        padding: 4rem 2.5rem;
+    }
+
+    .customers-slider {
+        .customer {
+            flex: 0 0 50%;
+        }
+    }
+}
+
+@media (width >= 1440px) {
+    .home-grateful-customers-section {
+        padding: 4rem 6rem;
+    }
+
+    .customers-slider {
+        .customer {
+            flex: 0 0 33%;
+            padding: 2rem;
+        }
+    }
+}

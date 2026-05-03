@@ -1,0 +1,36 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+.home-landing-section {
+    @include flex(column, null, null, null);
+
+    background-color: $color-grey;
+    padding: 2rem;
+
+    .title-1 {
+        font-weight: 900;
+        padding-bottom: 1rem;
+    }
+}
+
+.caption-2 {
+    padding-bottom: 1rem;
+}
+
+.landing-image {
+    max-width: 600px;
+}
+
+@media (width >= 768px) {
+    .home-landing-section {
+        @include flex(row, center, null, null);
+
+        padding: 4rem 2.5rem;
+    }
+}
+
+@media (width >= 1440px) {
+    .home-landing-section {
+        padding: 4rem 6rem;
+    }
+}

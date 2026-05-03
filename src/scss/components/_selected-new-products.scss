@@ -1,0 +1,17 @@
+@use '../base/fonts' as *;
+
+.home-selected-products-section, .home-new-products-section {
+    padding: 4rem 2rem;
+}
+
+@media (width >= 768px) {
+    .home-selected-products-section, .home-new-products-section {
+        padding: 4rem 2.5rem;
+    }
+}
+
+@media (width >= 1440px) {
+    .home-selected-products-section, .home-new-products-section {
+        padding: 4rem 6rem;
+    }
+}

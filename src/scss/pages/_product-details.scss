@@ -1,0 +1,245 @@
+@use "../base/fonts" as *;
+@use "../abstracts/mixins" as *;
+
+#main-product-details {
+  padding: 4rem 2rem;
+}
+
+.product-info-section {
+  @include flex(column, null, null, 1rem);
+
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .product-gallery {
+    @include flex(column, null, null, 1rem);
+
+    flex: 1;
+
+    .big {
+      width: 100%;
+
+      img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+      }
+    }
+
+    .options {
+      @include flex(row, null, space-between, 0.5rem);
+
+      img {
+        width: 23%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .product-info {
+    @include flex(column, null, space-between, 1rem);
+
+
+    .review {
+      @include flex(row, null, null, 1rem);
+    }
+
+    #clients-review-count {
+      color: $color-grey-dark;
+    }
+
+    .price {
+      font-weight: 700;
+    }
+
+    #product-details-form {
+      select {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .actions {
+      @include flex(row, null, null, 1rem);
+    }
+
+    .quantity-div {
+      width: 100px;
+
+      @include flex(row, center, space-between, 1rem);
+
+      padding: 0.3rem 1.5rem;
+      border: 2px solid $color-high;
+
+      button,
+      span {
+        font-size: 1.5rem;
+        color: $color-grey-dark;
+        font-weight: 700;
+      }
+    }
+
+    .btn {
+      flex: 1;
+    }
+
+    .payment-options {
+      @include flex(row, center, null, 1rem);
+
+      p,
+      i {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: $color-grey-dark;
+      }
+    }
+  }
+
+  .product-info>* {
+    flex: 1;
+  }
+}
+
+.product-desc-section {
+  margin-bottom: 2rem;
+
+  .details-p {
+    margin-bottom: 1rem;
+  }
+
+  .navigator {
+    font-weight: 700;
+    text-transform: uppercase;
+
+    @include flex(column, center, null, 1rem);
+
+    margin-bottom: 1rem;
+
+    .selected {
+      border-bottom: 2px solid $color-high;
+      padding-bottom: 4px;
+    }
+  }
+}
+
+.you-may-like-section {
+  .title-3 {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+
+    span {
+      display: inline-block;
+      border-bottom: 2px solid $color-high;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.error {
+  color: #d9534f;
+  margin-top: 0.5rem;
+}
+
+.success {
+  color: #28a745;
+  margin-top: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.reviews-section {
+  @include flex(column, null, null, 1rem);
+}
+
+.reviews-section .row {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.reviews-section .row input {
+  flex: 1;
+}
+
+.checkbox-row {
+  color: $color-grey-dark;
+  font-size: 0.8rem;
+}
+
+#review-message {
+  height: 100px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  height: 1rem;
+  margin-right: 0.5rem;
+  flex: 0;
+}
+
+.stars i {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $color-grey-dark;
+  transition: color 0.2s;
+}
+
+.stars i.filled {
+  color: gold;
+}
+
+#submit-review,
+#rate-title {
+  text-transform: uppercase;
+}
+
+@media (width >=768px) {
+  #main-product-details {
+    padding: 4rem 2.5rem;
+  }
+
+  .product-info-section {
+    @include flex(row, null, space-between, 1rem);
+
+    .product-gallery {
+      flex: 0 0 calc(50% - 0.5rem);
+    }
+
+    .product-info {
+      flex: 0 0 calc(50% - 0.5rem);
+    }
+  }
+
+  .product-desc-section {
+    .navigator {
+      @include flex(row, baseline, center, 1rem);
+    }
+  }
+}
+
+@media (width >=1440px) {
+  #main-product-details {
+    padding: 4rem 6rem;
+  }
+
+  .product-info-section {
+    gap: 2rem;
+
+    .product-gallery {
+      flex: 0 0 calc(50% - 1rem);
+    }
+
+    .product-info {
+      flex: 0 0 calc(50% - 1rem);
+
+      .quantity-div {
+        width: 130px;
+      }
+    }
+  }
+
+  #review-message {
+    height: 300px;
+  }
+}

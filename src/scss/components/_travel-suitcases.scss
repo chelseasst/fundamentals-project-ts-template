@@ -1,0 +1,85 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+
+.home-travel-suitcases-section {
+    padding: 4rem 2rem;
+
+    .products-slider {
+        color: $color-white;
+
+        .item {
+            flex: 0 0 200px;
+            height: 400px;
+
+            @include flex(column, null, flex-end, 1rem);
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.4s ease; // smooth zoom
+            transform-origin: center;
+            padding: 2rem;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            .item-title {
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+
+.item-1-sc {
+    background-image:
+        linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)),
+        url('./assets/travel-suitcase-1.png');
+}
+
+.item-2-sc {
+    background-image:
+        linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)),
+        url('./assets/travel-suitcase-2.png');
+}
+
+.item-3-sc {
+    background-image:
+        linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)),
+        url('./assets/travel-suitcase-3.png');
+}
+
+.item-4-sc {
+    background-image:
+        linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)),
+        url('./assets/travel-suitcase-4.png');
+}
+
+.item-5-sc {
+    background-image:
+        linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)),
+        url('./assets/travel-suitcase-1.png');
+}
+
+
+@media (width >= 768px) {
+    .home-travel-suitcases-section {
+        padding: 4rem 2.5rem;
+    }
+}
+
+@media (width >= 1440px) {
+    .home-travel-suitcases-section {
+        padding: 4rem 6rem;
+
+        .products-slider {
+            .item {
+                flex: 0 0 300px;
+                height: 600px;
+            }
+        }
+    }
+}

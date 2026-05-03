@@ -1,0 +1,105 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+#main-about {
+    // padding: 4rem 2rem;
+}
+
+.about-landing-section {
+    background-image: linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)), url("./assets/about/about-landing.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $color-white;
+
+    @include flex(column, center, center, null);
+
+    height: 85vh;
+}
+
+
+.new-arrivals-section {
+    padding: 4rem 2rem;
+
+    @include flex(column, null, null, 1rem);
+
+    .text {
+        @include flex(column, flex-start, space-between, 1rem);
+    }
+}
+
+.our-team-section {
+    padding: 4rem 2rem;
+
+    @include flex(column, null, null, null);
+
+
+    .team-slider {
+        @include flex(column, center, null, 1.5rem);
+
+        gap: 1.5rem;
+    }
+
+    .title-2 {
+        display: inline-block;
+        border-bottom: 2px solid $color-high;
+        padding-bottom: 4px;
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .person {
+        max-width: 300px;
+
+        @include flex(column, null, null, 0.5rem);
+
+        gap: 0.5rem;
+
+        .name {
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
+}
+
+
+@media (width >= 768px) {
+    .new-arrivals-section {
+        @include flex(row, null, null, 1rem);
+
+        padding: 4rem 2.5rem;
+
+        .text {
+            flex: 0 0 50%;
+        }
+
+        .image {
+            flex: 0 0 50%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .our-team-section {
+        padding: 4rem 2.5rem;
+
+        .team-slider {
+            @include flex(row, center, space-between, 3rem);
+        }
+    }
+}
+
+
+@media (width >= 1440px) {
+    .new-arrivals-section {
+        padding: 4rem 6rem;
+    }
+
+    .our-team-section {
+        padding: 4rem 6rem;
+    }
+}

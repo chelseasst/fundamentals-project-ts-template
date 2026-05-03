@@ -1,0 +1,124 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+
+.login-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 50%);
+
+    @include flex(row, center, center, null);
+
+    z-index: 20;
+
+    label {
+        font-weight: 400;
+    }
+
+    .title-2 {
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: relative;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+
+    // width: 300px;
+    width: 90%;
+    max-width: 300px;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1rem;
+}
+
+.password-wrapper {
+    position: relative;
+
+    .toggle-password {
+        position: absolute;
+        right: 0.6rem;
+        top: 35%;
+        transform: translateY(-35%);
+        color: $color-grey-dark;
+        cursor: pointer;
+    }
+}
+
+.login-options {
+    @include flex(column, center, space-between, null);
+
+    font-size: 0.8rem;
+}
+
+.remember-me {
+    @include flex(row, center, null, 0.5rem);
+
+    color: $color-grey-dark;
+
+    input {
+        margin-bottom: 0.5rem;
+        width: 1rem;
+        cursor: pointer;
+    }
+}
+
+.forgot-password a {
+    display: block;
+    color: $color-high;
+    margin-bottom: 0.5rem;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.login-error {
+    color: red;
+    text-align: center;
+}
+
+.login-error.hidden {
+    display: none;
+}
+
+.login-success {
+    color: green;
+    text-align: center;
+}
+
+.login-success.hidden {
+    display: none;
+}
+
+@media (width >= 768px) {
+    .modal {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .login-options {
+        @include flex(row, center, space-between, null);
+
+        font-size: 0.8rem;
+    }
+
+}

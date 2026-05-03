@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./dist/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="heading">
+      <div class="socials">
+        <a href="https://facebook.com">
+          <img src="./dist/assets/icons/facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://twitter.com">
+          <img src="./dist/assets/icons/twitter.png" alt="Twitter" />
+        </a>
+        <a href="https://instagram.com">
+          <img src="./dist/assets/icons/instagram.png" alt="Instagram" />
+        </a>
+      </div>
+      <div class="logo-div">
+        <a class="header-logo" href="./index.html">
+          <img src="./dist/assets/icons/suitcase-logo.svg" alt="Best SHOP logo" />
+          <span>Best SHOP</span>
+        </a>
+      </div>
+      <div class="profile">
+        <button class="profile-icon">
+          <img src="./dist/assets/icons/user.svg" alt="User Icon" />
+        </button>
+        <a href="./cart.html" class="cart-icon">
+          <span id="cart-counter">2</span>
+          <img src="./dist/assets/icons/shopping-cart.svg" alt="Cart Icon">
+        </a>
+      </div>
+    </div>
+
+    <nav class="header-nav">
+      <a href="./index.html">Home</a>
+      <div class="header-dropdown">
+        <a class="header-dropdown-link" href="./catalog.html">
+          Catalog
+          <img src="./dist/assets/icons/arrow.svg" alt="arrow" class="nav-arrow" />
+        </a>
+        <div class="header-dropdown-menu">
+          <a href="./catalog.html?category=all">All</a>
+          <a href="./catalog.html?category=men">Men</a>
+          <a href="./catalog.html?category=women">Women</a>
+          <a href="./catalog.html?category=kids">Kids</a>
+        </div>
+      </div>
+      <a href="./about.html">About Us</a>
+      <a href="./contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <main id="main-catalog">
+    <section class="catalog-actions">
+      <div class="wrapper">
+        <p id="catalog-results-text" class="catalog-results-text"></p>
+        <div class="catalog-sort">
+          <select id="catalog-sort-select" name="catalog-sort">
+            <option value="default" selected>Default Sorting</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="popularity-desc">Popularity</option>
+            <option value="rating-desc">Rating</option>
+          </select>
+        </div>
+      </div>
+      <form class="search-models-form" action="#" method="get">
+        <input id="catalog-search-input" name="search" type="search" placeholder="Search Models" />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </form>
+    </section>
+    <section class="items-section">
+      <div class="catalog">
+        <div class="catalog-items text-center" id="catalog-products-container">
+          <!-- PRODUCTS -->
+        </div>
+        <div class="catalog-navigator">
+          <div class="pages" id="catalog-pages">
+            <!-- PAGES COUNT -->
+          </div>
+          <span id="next">Next <i class="fa-solid fa-angle-right"></i></span>
+        </div>
+      </div>
+      <div class="top-sets">
+        <p class="title">Top Best Sets</p>
+        <div class="top-sets-list" id="top-sets-list">
+          <!-- TOP PICKS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="login-modal-overlay hidden">
+    <div class="modal">
+      <button class="close-btn">✕</button>
+
+      <h2 class="title-2 text-center">Log In</h2>
+
+      <form id="login-form">
+        <label>Email address <span>*</span></label>
+        <input type="email" id="email" required>
+
+        <label>Password <span>*</span></label>
+        <div class="password-wrapper">
+          <input type="password" id="password" required>
+          <i class="fa-regular fa-eye toggle-password"></i>
+        </div>
+        <p class="login-error hidden"></p>
+        <p class="login-success hidden">Login successful!</p>
+        <div class="login-options">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <div class="forgot-password">
+            <a href="">Forgot Your Password?</a>
+          </div>
+        </div>
+        <button type="submit" class="btn">Log In</button>
+      </form>
+    </div>
+  </div>
+  <div id="search-popup" class="search-popup hidden">
+    <div class="search-popup-content">
+      <p>Product not found</p>
+      <button class="btn" id="popup-close">OK</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="our-benefits-back">
+      <div class="our-benefits">
+        <p class="title">Our Benefits</p>
+        <div class="benefits-container">
+          <div class="benefit">
+            <img src="./dist/assets/icons/benefit-global.png" alt="">
+            <p>Velit nisl sodales eget donec quis. volutpat orci.</p>
+          </div>
+          <div class="benefit">
+            <img src="./dist/assets/icons/benefit-transport.png" alt="">
+            <p>Dolor eu varius. Morbi fermentum velit nisl.</p>
+          </div>
+          <div class="benefit">
+            <img src="./dist/assets/icons/benefit-finance.png" alt="">
+            <p>Malesuada fames ac ante ipsum primis in faucibus.</p>
+          </div>
+          <div class="benefit">
+            <img src="./dist/assets/icons/benefit-education.png" alt="">
+            <p>Nisl sodales eget donec quis. volutpat orci. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-content">
+      <div class="categories">
+        <ul class="about">
+          <li>
+            <a href="./about.html">
+              <p>About Us</p>
+            </a>
+          </li>
+          <li>Organisation</li>
+          <li>Partners</li>
+          <li>Clients</li>
+        </ul>
+        <ul class="links">
+          <li>
+            <p>Interesting Links</p>
+          </li>
+          <li>Photo Gallery</li>
+          <li>Our Team</li>
+          <li>Socials</li>
+        </ul>
+        <ul class="achievements">
+          <li>
+            <p>Achievements</p>
+          </li>
+          <li>Winning Awards</li>
+          <li>Press</li>
+          <li>Our Amazing CLients</li>
+        </ul>
+        <ul class="shipping">
+          <li>
+            <p>Shipping Information</p>
+          </li>
+          <li>Nulla eleifend pulvinar purus, molestie euismod odio imperdiet ac. Ut sit amet erat nec nibh
+            rhoncus varius in non lorem. Donec interdum, lectus in convallis pulvinar, enim elit porta
+            sapien, vel finibus erat felis sed neque. Etiam aliquet neque sagittis erat tincidunt
+            aliquam. </li>
+        </ul>
+      </div>
+      <div class="contact-us">
+        <a href="./contact.html">
+          <p class="title">Contanct Us</p>
+        </a>
+        <p class="expl">Bendum dolor eu varius. Morbi fermentum velitsodales egetonec. volutpat orci. Sed
+          ipsum felis, tristique egestas et, convallis ac velitn consequat nec luctus.</p>
+        <div class="contacts">
+          <div>
+            <i class="fa-solid fa-phone"></i>
+            <p> Phone: (+63) 236 6322 </p>
+          </div>
+          <div>
+            <i class="fa-solid fa-envelope"></i>
+            <p>public@news.com</p>
+          </div>
+          <div id="hours">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <p>Mon - Fri: 10am - 6pm</p>
+              <p>Sat - Sun: 10am - 6pm</p>
+            </div>
+          </div>
+          <div>
+            <i class="fa-solid fa-location-dot"></i>
+            <p>639 Jade Valley, Washington Dc</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>© Copyright 2025</p>
+    </div>
+  </footer>
+
+  <script type="module" src="./dist/js/main.js"></script>
+  <script type="module" src="./dist/js/catalog.js"></script>
+</body>
+
+</html>

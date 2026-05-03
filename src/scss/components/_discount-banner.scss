@@ -1,0 +1,90 @@
+@use '../base/fonts' as *;
+@use '../abstracts/mixins' as *;
+
+.home-discount-section {
+    padding: 0 2rem 2rem;
+}
+
+.discount-banner {
+    height: 800px;
+    width: 100%;
+    position: relative;
+    top: -2rem;
+
+    @include flex(column, null, null, null);
+
+    margin: 0 auto;
+    box-shadow: 0 0 19px 3px rgb(0 0 0 / 26%);
+}
+
+.discount-content,
+.discount-image {
+    @include flex(column, flex-start, center, 1rem);
+
+    flex: 0 0 50%;
+    padding: 2rem;
+}
+
+.discount-content {
+    background-color: $color-white;
+
+    .publisher {
+        @include flex(row, center, null, 1rem);
+
+        gap: 1rem;
+
+        .profile-img {
+            width: 55px;
+        }
+
+        #name {
+            font-weight: 700;
+        }
+
+        #position {
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.discount-image {
+    background:
+        linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)),
+        url('./assets/home/suitcases.png'); // your image path
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $color-white;
+
+    p {
+        width: 75%;
+    }
+}
+
+@media (width >= 768px) {
+    .home-discount-section {
+        padding: 0 2.5rem;
+    }
+
+    .discount-banner {
+        height: 400px;
+
+        @include flex(row, null, null, null);
+    }
+}
+
+@media (width >= 1440px) {
+    .home-discount-section {
+        padding: 0 6rem;
+    }
+
+    .discount-banner {
+        height: 500px;
+    }
+
+    .discount-content,
+    .discount-image {
+        padding: 2.5rem;
+    }
+}

@@ -1,0 +1,18 @@
+@use '../base/fonts' as *;
+
+.btn {
+    background-color: $color-high;
+    color: $color-white;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+
+    // width: 130px;
+
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: $color-high-dark;
+}
