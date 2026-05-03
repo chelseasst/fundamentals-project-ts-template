@@ -1,3 +1,8 @@
+## 🚀 Live Demo
+
+[![Vercel Deployment](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://fundamentals-project-ts-template.vercel.app)
+
+
 # 🧳 Travel Shop — Frontend E‑Commerce Project
 
 This project is a fully responsive, multi‑page e‑commerce frontend built using **HTML**, **TypeScript**, and **SCSS**, compiled and served through a modern development environment.  
