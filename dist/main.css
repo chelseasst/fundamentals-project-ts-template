@@ -1428,6 +1428,7 @@ label span {
 .product-info-section .product-info .actions {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1rem;
 }
 .product-info-section .product-info .quantity-div {
