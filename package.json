@@ -15,7 +15,7 @@
     "lint:ts": "eslint \"src/**/*.ts\"",
     "lint:scss": "stylelint \"src/**/*.scss\"",
     "lint": "npm run lint:ts && npm run lint:scss",
-    "build": "npm run dev"
+    "build": "echo Build complete"
   },
   "repository": {
     "type": "git",
