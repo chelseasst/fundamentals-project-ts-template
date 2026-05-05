@@ -41,6 +41,9 @@ function setupContactForm() {
 
         successEl.classList.remove("hidden");
         form.reset();
+        setTimeout(() => {
+            successEl.classList.add("hidden");
+        }, 2000);
     });
 
     function showError(msg: string) {

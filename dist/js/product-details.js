@@ -8,7 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { loadProducts } from "./data.js";
+import { renderStars } from "./rating-stars.js";
 import { addToCartWithQuantity } from "./cart.js";
+import { setupAddToCartButtons } from "./cart-ui.js";
 function initProductDetails() {
     return __awaiter(this, void 0, void 0, function* () {
         const params = new URLSearchParams(window.location.search);
@@ -17,13 +19,16 @@ function initProductDetails() {
             return;
         const products = yield loadProducts();
         const product = products.find(p => p.id === productId);
-        if (!product)
+        if (!product) {
+            renderNotFoundPage();
             return;
+        }
         renderProductInfo(product);
         renderProductGallery(product);
-        renderYouMayLike(products, product);
         setupProductDetailsAddToCart(product);
-        setupTabs();
+        renderYouMayLike(products, product);
+        setupAddToCartButtons(products);
+        setupTabs(product);
     });
 }
 function renderProductInfo(product) {
@@ -42,25 +47,12 @@ function renderProductGallery(product) {
     const mainImage = document.getElementById("product-main-image");
     const firstImage = document.getElementById("first-image");
     const thumbnails = document.getElementById("product-thumbnails");
-    if (!mainImage || !thumbnails || !firstImage)
+    if (!mainImage || !firstImage || !thumbnails)
         return;
-    // Set main image
     mainImage.src = product.imageUrl;
     mainImage.alt = product.name;
-    //Set first image
     firstImage.src = product.imageUrl;
     firstImage.alt = product.name;
-    //   // Build thumbnails
-    //   const galleryImages = [
-    //     product.imageUrl,
-    //     product.imageFront,
-    //     product.imageOpen,
-    //     product.imageInside
-    //   ].filter(Boolean);
-    //   thumbnails.innerHTML = galleryImages
-    //     .map(img => `<img src="${img}" alt="${product.name}">`)
-    //     .join("");
-    // Thumbnail click → change main image
     thumbnails.querySelectorAll("img").forEach(img => {
         img.addEventListener("click", () => {
             mainImage.src = img.src;
@@ -71,7 +63,6 @@ function renderYouMayLike(products, current) {
     const container = document.getElementById("you-may-like-container");
     if (!container)
         return;
-    //randomly chosen
     const suggestions = products
         .filter(p => p.category === current.category && p.id !== current.id)
         .sort(() => Math.random() - 0.5)
@@ -109,10 +100,10 @@ function setupQuantitySelector() {
             valueEl.textContent = String(quantity);
         }
     });
-    return () => quantity; // return a function that gives the current quantity
+    return () => quantity;
 }
 function setupProductDetailsAddToCart(product) {
-    const btn = document.querySelector(".add-to-cart");
+    const btn = document.querySelector(".details-add-to-cart");
     if (!btn)
         return;
     const getQuantity = setupQuantitySelector();
@@ -125,18 +116,7 @@ function renderRating(rating) {
     const ratingEl = document.getElementById("product-rating");
     if (!ratingEl)
         return;
-    const fullStars = Math.floor(rating); // 4.9 → 4
-    const emptyStars = 5 - fullStars;
-    let html = "";
-    // Full yellow stars
-    for (let i = 0; i < fullStars; i++) {
-        html += `<span><i class="fa-solid fa-star"></i></span>`;
-    }
-    // Empty grey stars
-    for (let i = 0; i < emptyStars; i++) {
-        html += `<span><i class="fa-regular fa-star"></i></span>`;
-    }
-    ratingEl.innerHTML = html;
+    ratingEl.innerHTML = renderStars(rating);
 }
 const detailsHTML = `
  <p class="details-p">
@@ -166,10 +146,17 @@ const detailsHTML = `
 `;
 const reviewsHTML = `
   <div class="reviews-section">
-    <h3>Add Review</h3>
-    <p>Your email address won't be shared with anybody. Required fields have the symbol *</p>
 
-    <form id="review-form">
+     <div class="all-reviews">
+        <p id="reviews-count"></p>
+        <div id="reviews-holder"></div>
+     </div>
+
+     <div class="write-review">
+        <h4>Add Review</h4>
+        <p>Your email address won't be shared with anybody. Required fields have the symbol *</p>
+   
+        <form id="review-form">
 
      <div class="row">
       <label id="rate-title">RATE PRODUCT</label>
@@ -199,6 +186,7 @@ const reviewsHTML = `
 
       <button class="btn" id="submit-review">Submit</button>
     </form>
+    </div>
   </div>
 `;
 const shippingHTML = `
@@ -206,9 +194,9 @@ const shippingHTML = `
   <p>Free returns within 30 days.</p>
   <p>International shipping available.</p>
 `;
-function setupTabs() {
+function setupTabs(product) {
     const tabs = document.querySelectorAll(".navigator a");
-    const content = document.querySelector(".product-desc-section .content");
+    const content = document.querySelector(".product-details-section .content");
     if (!content)
         return;
     tabs.forEach(tab => {
@@ -222,7 +210,9 @@ function setupTabs() {
             }
             if (tabName === "reviews") {
                 content.innerHTML = reviewsHTML;
-                setupReviewValidation();
+                renderReviews(product.id);
+                updateReviewsCount(product.id, product.name);
+                setupReviewValidation(product);
             }
             if (tabName === "shipping") {
                 content.innerHTML = shippingHTML;
@@ -236,9 +226,7 @@ function setupStarRating() {
     stars.forEach(star => {
         star.addEventListener("click", () => {
             rating = Number(star.getAttribute("data-value"));
-            // Reset all stars
             stars.forEach(s => s.classList.remove("filled"));
-            // Fill up to selected star
             for (let i = 0; i < rating; i++) {
                 stars[i].classList.add("filled");
             }
@@ -246,7 +234,7 @@ function setupStarRating() {
     });
     return () => rating;
 }
-function setupReviewValidation() {
+function setupReviewValidation(product) {
     const getRating = setupStarRating();
     const nameInput = document.getElementById("review-name");
     const emailInput = document.getElementById("review-email");
@@ -267,11 +255,81 @@ function setupReviewValidation() {
             errorEl.classList.remove("hidden");
             return;
         }
+        const review = {
+            name,
+            email,
+            message,
+            rating,
+            date: new Date().toLocaleDateString()
+        };
+        saveReview(product.id, review);
+        renderReviews(product.id);
+        updateReviewsCount(product.id, product.name);
         successEl.classList.remove("hidden");
         nameInput.value = "";
         emailInput.value = "";
         messageInput.value = "";
         document.querySelectorAll("#review-stars i").forEach(s => s.classList.remove("filled"));
     });
+}
+// REVIEWS
+export function loadReviews(productId) {
+    const key = `reviews_${productId}`;
+    return JSON.parse(localStorage.getItem(key) || "[]");
+}
+export function saveReview(productId, review) {
+    const key = `reviews_${productId}`;
+    const existing = loadReviews(productId);
+    existing.push(review);
+    localStorage.setItem(key, JSON.stringify(existing));
+}
+export function renderReviews(productId) {
+    const container = document.getElementById("reviews-holder");
+    if (!container)
+        return;
+    const reviews = loadReviews(productId);
+    if (reviews.length === 0) {
+        container.innerHTML = `<p>No reviews yet. Be the first!</p>`;
+        return;
+    }
+    container.innerHTML = reviews
+        .map(r => `
+      <div class="review">
+        <div class="image">
+          <img src="./dist/assets/team-person-1.png" />
+        </div>
+        <div class="content">
+          <div class="nameReview">
+            <p class="name">${r.name} <span>- ${r.date}</span></p>
+            <div class="stars-review">
+              ${renderStars(r.rating)}
+            </div>
+          </div>
+          <p>${r.message}</p>
+        </div>
+      </div>
+    `)
+        .join("");
+}
+function updateReviewsCount(productId, productName) {
+    const countEl = document.getElementById("reviews-count");
+    if (!countEl)
+        return;
+    const reviews = loadReviews(productId);
+    const count = reviews.length;
+    const plural = count === 1 ? "review" : "reviews";
+    countEl.textContent = `${count} ${plural} for ${productName}`;
+}
+function renderNotFoundPage() {
+    const main = document.getElementById("main-product-details");
+    if (!main)
+        return;
+    main.innerHTML = `
+    <div class="not-found">
+      <h2>Product Not Found</h2>
+      <p>The product you are looking for does not exist or is no longer available.</p>
+      <a href="./catalog.html" class="btn">Back to Catalog</a>
+    </div>
+  `;
 }
 initProductDetails();

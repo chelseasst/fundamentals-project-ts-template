@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { loadProducts } from "./data.js";
+import { renderStars } from "./rating-stars.js";
 import { setupAddToCartButtons } from "./cart-ui.js";
 let allProducts = [];
 let filteredProducts = [];
@@ -33,9 +34,7 @@ function renderCatalog() {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const productsToShow = filteredProducts.slice(start, end);
-    // Update results text
     resultsText.textContent = `Showing ${start + 1}-${Math.min(end, filteredProducts.length)} of ${filteredProducts.length} Results`;
-    // Render products
     container.innerHTML = productsToShow
         .map((p) => `
    <div class="product">
@@ -81,12 +80,6 @@ function renderTopRandomSets() {
             window.location.href = `product-details.html?id=${id}`;
         });
     });
-}
-function renderStars(rating) {
-    const full = Math.floor(rating);
-    const empty = 5 - full;
-    return (`<span>${'<i class="fa-solid fa-star"></i>'.repeat(full)}</span>` +
-        `<span>${'<i class="fa-regular fa-star"></i>'.repeat(empty)}</span>`);
 }
 function setupSorting() {
     const sortSelect = document.getElementById("catalog-sort-select");

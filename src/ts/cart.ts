@@ -8,12 +8,11 @@ export interface CartItem {
   quantity: number;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+export function initCartPage() {
   renderCart();
   setupCartActions();
   setupCheckout();
-});
-
+}
 
 export function getCart(): CartItem[] {
   return JSON.parse(localStorage.getItem("cart") || "[]");
@@ -46,13 +45,7 @@ export function addToCartWithQuantity(product: Product, quantity: number) {
   if (existing) {
     existing.quantity += quantity;
   } else {
-    cart.push({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      quantity: quantity
-    });
+    cart.push({ ...product, quantity: quantity });
   }
 
   saveCart(cart);
@@ -117,16 +110,6 @@ export function renderCart() {
   updateTotals();
 }
 
-function setupCartActions() {
-  const clearBtn = document.getElementById("clear-cart");
-  if (!clearBtn) return;
-
-  clearBtn.addEventListener("click", () => {
-    saveCart([]);
-    updateCartCounter();
-    renderCart();
-  });
-}
 function attachCartEvents() {
   const cart = getCart();
 
@@ -175,6 +158,16 @@ function attachCartEvents() {
   });
 }
 
+function setupCartActions() {
+  const clearBtn = document.getElementById("clear-cart");
+  if (!clearBtn) return;
+
+  clearBtn.addEventListener("click", () => {
+    saveCart([]);
+    updateCartCounter();
+    renderCart();
+  });
+}
 
 function setupCheckout() {
   const btn = document.getElementById("checkout");
@@ -208,3 +201,4 @@ function updateTotals() {
   document.getElementById("total")!.textContent = `$${total}`;
 }
 
+initCartPage();

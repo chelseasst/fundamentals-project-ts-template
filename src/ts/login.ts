@@ -22,20 +22,17 @@ export const initLoginForm = () => {
         const email = emailInput.value;
         const password = passwordInput.value;
 
-        // Validate email
         if (!isValidEmail(email)) {
             errorBox.textContent = "Please enter a valid email address.";
             errorBox.classList.remove("hidden");
             return;
         }
 
-
         if (!isRequired(password)) {
             errorBox.textContent = "Password is required.";
             errorBox.classList.remove("hidden");
             return;
         }
-
 
         errorBox.classList.add("hidden");
         successBox.classList.remove("hidden");
@@ -45,5 +42,19 @@ export const initLoginForm = () => {
             successBox.classList.add("hidden");
             closeModal();
         }, 2000);
+    });
+    initPasswordToggle();
+};
+
+function initPasswordToggle() {
+    const passwordInput = document.querySelector("#password") as HTMLInputElement;
+    const toggleIcon = document.querySelector(".toggle-password") as HTMLElement;
+
+    if (!passwordInput || !toggleIcon) return;
+
+    toggleIcon.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+
+        passwordInput.type = isPassword ? "text" : "password";
     });
 };

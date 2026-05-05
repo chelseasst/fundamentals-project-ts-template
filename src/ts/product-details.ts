@@ -1,84 +1,75 @@
 import { loadProducts } from "./data.js";
 import type { Product } from "./product.js";
+import type { Review } from "./review.js";
+import { renderStars } from "./rating-stars.js";
 import { addToCartWithQuantity } from "./cart.js";
+import { setupAddToCartButtons } from "./cart-ui.js";
 
 async function initProductDetails() {
-    const params = new URLSearchParams(window.location.search);
-    const productId = params.get("id");
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
 
-    if (!productId) return;
+  if (!productId) return;
 
-    const products: Product[] = await loadProducts();
-    const product = products.find(p => p.id === productId);
+  const products: Product[] = await loadProducts();
+  const product = products.find(p => p.id === productId);
 
-    if (!product) return;
+  if (!product) {
+    renderNotFoundPage();
+    return;
+  }
 
-    renderProductInfo(product);
-    renderProductGallery(product);
-    renderYouMayLike(products, product);
-    setupProductDetailsAddToCart(product);
-    setupTabs();
+  renderProductInfo(product);
+  renderProductGallery(product);
+  setupProductDetailsAddToCart(product);
+  renderYouMayLike(products, product);
+  setupAddToCartButtons(products);
+  setupTabs(product);
 }
 
 function renderProductInfo(product: Product) {
-    const titleEl = document.getElementById("product-title");
-    const priceEl = document.getElementById("product-price");
-    const btn = document.querySelector(".add-to-cart") as HTMLButtonElement;
+  const titleEl = document.getElementById("product-title");
+  const priceEl = document.getElementById("product-price");
+  const btn = document.querySelector(".add-to-cart") as HTMLButtonElement;
 
-    if (btn) btn.setAttribute("data-id", product.id);
-    if (titleEl) titleEl.textContent = product.name;
-    if (priceEl) priceEl.textContent = `$${product.price}`;
-    renderRating(product.rating);
+  if (btn) btn.setAttribute("data-id", product.id);
+  if (titleEl) titleEl.textContent = product.name;
+  if (priceEl) priceEl.textContent = `$${product.price}`;
+  renderRating(product.rating);
 }
 
 function renderProductGallery(product: Product) {
-    const mainImage = document.getElementById("product-main-image") as HTMLImageElement;
-    const firstImage = document.getElementById("first-image") as HTMLImageElement;
-    const thumbnails = document.getElementById("product-thumbnails");
+  const mainImage = document.getElementById("product-main-image") as HTMLImageElement;
+  const firstImage = document.getElementById("first-image") as HTMLImageElement;
+  const thumbnails = document.getElementById("product-thumbnails");
 
-    if (!mainImage || !thumbnails || !firstImage) return;
+  if (!mainImage || !firstImage || !thumbnails) return;
 
-    // Set main image
-    mainImage.src = product.imageUrl;
-    mainImage.alt = product.name;
+  mainImage.src = product.imageUrl;
+  mainImage.alt = product.name;
 
-    //Set first image
-    firstImage.src = product.imageUrl;
-    firstImage.alt = product.name;
+  firstImage.src = product.imageUrl;
+  firstImage.alt = product.name;
 
-    //   // Build thumbnails
-    //   const galleryImages = [
-    //     product.imageUrl,
-    //     product.imageFront,
-    //     product.imageOpen,
-    //     product.imageInside
-    //   ].filter(Boolean);
-
-    //   thumbnails.innerHTML = galleryImages
-    //     .map(img => `<img src="${img}" alt="${product.name}">`)
-    //     .join("");
-
-    // Thumbnail click → change main image
-    thumbnails.querySelectorAll("img").forEach(img => {
-        img.addEventListener("click", () => {
-            mainImage.src = img.src;
-        });
+  thumbnails.querySelectorAll("img").forEach(img => {
+    img.addEventListener("click", () => {
+      mainImage.src = img.src;
     });
+  });
 }
 
 function renderYouMayLike(products: Product[], current: Product) {
-    const container = document.getElementById("you-may-like-container");
-    if (!container) return;
+  const container = document.getElementById("you-may-like-container");
+  if (!container) return;
 
-    //randomly chosen
-    const suggestions = products
-        .filter(p => p.category === current.category && p.id !== current.id)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 4);
+  const suggestions = products
+    .filter(p => p.category === current.category && p.id !== current.id)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
 
-    container.innerHTML = suggestions
-        .map(
-            p => `
+  container.innerHTML = suggestions
+    .map(
+      p => `
       <div class="product">
         <a href="product-details.html?id=${p.id}" class="product-link">
           <div class="image-cont">
@@ -93,63 +84,49 @@ function renderYouMayLike(products: Product[], current: Product) {
         <button class="btn add-to-cart" data-id="${p.id}">Add To Cart</button>
       </div>
     `
-        )
-        .join("");
+    )
+    .join("");
 }
 function setupQuantitySelector() {
-    const decreaseBtn = document.querySelector(".decrease") as HTMLButtonElement;
-    const increaseBtn = document.querySelector(".increase") as HTMLButtonElement;
-    const valueEl = document.querySelector(".value") as HTMLSpanElement;
+  const decreaseBtn = document.querySelector(".decrease") as HTMLButtonElement;
+  const increaseBtn = document.querySelector(".increase") as HTMLButtonElement;
+  const valueEl = document.querySelector(".value") as HTMLSpanElement;
 
-    let quantity = 1;
+  let quantity = 1;
 
-    increaseBtn.addEventListener("click", () => {
-        quantity++;
-        valueEl.textContent = String(quantity);
-    });
+  increaseBtn.addEventListener("click", () => {
+    quantity++;
+    valueEl.textContent = String(quantity);
+  });
 
-    decreaseBtn.addEventListener("click", () => {
-        if (quantity > 1) {
-            quantity--;
-            valueEl.textContent = String(quantity);
-        }
-    });
+  decreaseBtn.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      valueEl.textContent = String(quantity);
+    }
+  });
 
-    return () => quantity; // return a function that gives the current quantity
+  return () => quantity;
 }
+
 function setupProductDetailsAddToCart(product: Product) {
-    const btn = document.querySelector(".add-to-cart") as HTMLButtonElement;
-    if (!btn) return;
+  const btn = document.querySelector(".details-add-to-cart") as HTMLButtonElement;
+  if (!btn) return;
 
-    const getQuantity = setupQuantitySelector();
+  const getQuantity = setupQuantitySelector();
 
-    btn.addEventListener("click", () => {
-        const quantity = getQuantity();
-        addToCartWithQuantity(product, quantity);
-    });
+  btn.addEventListener("click", () => {
+    const quantity = getQuantity();
+    addToCartWithQuantity(product, quantity);
+  });
 }
 
 
 function renderRating(rating: number) {
-    const ratingEl = document.getElementById("product-rating");
-    if (!ratingEl) return;
+  const ratingEl = document.getElementById("product-rating");
+  if (!ratingEl) return;
 
-    const fullStars = Math.floor(rating); // 4.9 → 4
-    const emptyStars = 5 - fullStars;
-
-    let html = "";
-
-    // Full yellow stars
-    for (let i = 0; i < fullStars; i++) {
-        html += `<span><i class="fa-solid fa-star"></i></span>`;
-    }
-
-    // Empty grey stars
-    for (let i = 0; i < emptyStars; i++) {
-        html += `<span><i class="fa-regular fa-star"></i></span>`;
-    }
-
-    ratingEl.innerHTML = html;
+  ratingEl.innerHTML = renderStars(rating);
 }
 
 
@@ -182,10 +159,17 @@ const detailsHTML = `
 
 const reviewsHTML = `
   <div class="reviews-section">
-    <h3>Add Review</h3>
-    <p>Your email address won't be shared with anybody. Required fields have the symbol *</p>
 
-    <form id="review-form">
+     <div class="all-reviews">
+        <p id="reviews-count"></p>
+        <div id="reviews-holder"></div>
+     </div>
+
+     <div class="write-review">
+        <h4>Add Review</h4>
+        <p>Your email address won't be shared with anybody. Required fields have the symbol *</p>
+   
+        <form id="review-form">
 
      <div class="row">
       <label id="rate-title">RATE PRODUCT</label>
@@ -215,6 +199,7 @@ const reviewsHTML = `
 
       <button class="btn" id="submit-review">Submit</button>
     </form>
+    </div>
   </div>
 `;
 
@@ -225,95 +210,178 @@ const shippingHTML = `
   <p>International shipping available.</p>
 `;
 
-function setupTabs() {
-    const tabs = document.querySelectorAll(".navigator a");
-    const content = document.querySelector(".product-desc-section .content");
+function setupTabs(product: Product) {
+  const tabs = document.querySelectorAll(".navigator a");
+  const content = document.querySelector(".product-details-section .content");
 
-    if (!content) return;
+  if (!content) return;
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", (e) => {
-            e.preventDefault();
+  tabs.forEach(tab => {
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
 
-            tabs.forEach(t => t.classList.remove("selected"));
-            tab.classList.add("selected");
+      tabs.forEach(t => t.classList.remove("selected"));
+      tab.classList.add("selected");
 
-            const tabName = tab.getAttribute("data-tab");
+      const tabName = tab.getAttribute("data-tab");
 
-            if (tabName === "details") {
-                content.innerHTML = detailsHTML;
-            }
+      if (tabName === "details") {
+        content.innerHTML = detailsHTML;
+      }
 
-            if (tabName === "reviews") {
-                content.innerHTML = reviewsHTML;
-                setupReviewValidation();
-            }
+      if (tabName === "reviews") {
+        content.innerHTML = reviewsHTML;
+        renderReviews(product.id);
+        updateReviewsCount(product.id, product.name);
+        setupReviewValidation(product);
+      }
 
-            if (tabName === "shipping") {
-                content.innerHTML = shippingHTML;
-            }
-        });
+      if (tabName === "shipping") {
+        content.innerHTML = shippingHTML;
+      }
     });
+  });
 }
 
 function setupStarRating() {
-    const stars = document.querySelectorAll("#review-stars i");
-    let rating = 0;
+  const stars = document.querySelectorAll("#review-stars i");
+  let rating = 0;
 
-    stars.forEach(star => {
-        star.addEventListener("click", () => {
-            rating = Number(star.getAttribute("data-value"));
+  stars.forEach(star => {
+    star.addEventListener("click", () => {
+      rating = Number(star.getAttribute("data-value"));
 
-            // Reset all stars
-            stars.forEach(s => s.classList.remove("filled"));
+      stars.forEach(s => s.classList.remove("filled"));
 
-            // Fill up to selected star
-            for (let i = 0; i < rating; i++) {
-                stars[i].classList.add("filled");
-            }
-        });
+      for (let i = 0; i < rating; i++) {
+        stars[i].classList.add("filled");
+      }
     });
+  });
 
-    return () => rating;
+  return () => rating;
 }
 
-function setupReviewValidation() {
-    const getRating = setupStarRating();
+function setupReviewValidation(product: Product) {
+  const getRating = setupStarRating();
 
-    const nameInput = document.getElementById("review-name")! as HTMLInputElement;
-    const emailInput = document.getElementById("review-email")! as HTMLInputElement;
-    const messageInput = document.getElementById("review-message")! as HTMLTextAreaElement;
+  const nameInput = document.getElementById("review-name")! as HTMLInputElement;
+  const emailInput = document.getElementById("review-email")! as HTMLInputElement;
+  const messageInput = document.getElementById("review-message")! as HTMLTextAreaElement;
 
-    const errorEl = document.getElementById("review-error")!;
-    const successEl = document.getElementById("review-success")!;
-    const submitBtn = document.getElementById("submit-review")!;
+  const errorEl = document.getElementById("review-error")!;
+  const successEl = document.getElementById("review-success")!;
+  const submitBtn = document.getElementById("submit-review")!;
 
 
-    submitBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
 
-        errorEl.classList.add("hidden");
-        successEl.classList.add("hidden");
+    errorEl.classList.add("hidden");
+    successEl.classList.add("hidden");
 
-        const rating = getRating();
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-        const message = messageInput.value.trim();
+    const rating = getRating();
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
 
-        if (!rating || !name || !email || !message) {
-            errorEl.textContent = "Please fill in all required fields.";
-            errorEl.classList.remove("hidden");
-            return;
-        }
+    if (!rating || !name || !email || !message) {
+      errorEl.textContent = "Please fill in all required fields.";
+      errorEl.classList.remove("hidden");
+      return;
+    }
+    const review: Review = {
+      name,
+      email,
+      message,
+      rating,
+      date: new Date().toLocaleDateString()
+    };
+    saveReview(product.id, review);
+    renderReviews(product.id);
+    updateReviewsCount(product.id, product.name);
 
-        successEl.classList.remove("hidden");
+    successEl.classList.remove("hidden");
 
-        nameInput.value = "";
-        emailInput.value = "";
-        messageInput.value = "";
+    nameInput.value = "";
+    emailInput.value = "";
+    messageInput.value = "";
 
-        document.querySelectorAll("#review-stars i").forEach(s => s.classList.remove("filled"));
-    });
+    document.querySelectorAll("#review-stars i").forEach(s => s.classList.remove("filled"));
+  });
+}
+
+// REVIEWS
+export function loadReviews(productId: string): Review[] {
+  const key = `reviews_${productId}`;
+  return JSON.parse(localStorage.getItem(key) || "[]");
+}
+
+export function saveReview(productId: string, review: Review): void {
+  const key = `reviews_${productId}`;
+  const existing: Review[] = loadReviews(productId);
+
+  existing.push(review);
+
+  localStorage.setItem(key, JSON.stringify(existing));
+}
+
+export function renderReviews(productId: string) {
+  const container = document.getElementById("reviews-holder");
+  if (!container) return;
+
+  const reviews = loadReviews(productId);
+
+  if (reviews.length === 0) {
+    container.innerHTML = `<p>No reviews yet. Be the first!</p>`;
+    return;
+  }
+
+  container.innerHTML = reviews
+    .map(r => `
+      <div class="review">
+        <div class="image">
+          <img src="./dist/assets/team-person-1.png" />
+        </div>
+        <div class="content">
+          <div class="nameReview">
+            <p class="name">${r.name} <span>- ${r.date}</span></p>
+            <div class="stars-review">
+              ${renderStars(r.rating)}
+            </div>
+          </div>
+          <p>${r.message}</p>
+        </div>
+      </div>
+    `)
+    .join("");
+
+}
+
+function updateReviewsCount(productId: string, productName: string) {
+  const countEl = document.getElementById("reviews-count");
+  if (!countEl) return;
+
+  const reviews = loadReviews(productId);
+  const count = reviews.length;
+
+  const plural = count === 1 ? "review" : "reviews";
+
+  countEl.textContent = `${count} ${plural} for ${productName}`;
+}
+
+
+
+function renderNotFoundPage() {
+  const main = document.getElementById("main-product-details");
+  if (!main) return;
+  main.innerHTML = `
+    <div class="not-found">
+      <h2>Product Not Found</h2>
+      <p>The product you are looking for does not exist or is no longer available.</p>
+      <a href="./catalog.html" class="btn">Back to Catalog</a>
+    </div>
+  `;
 }
 
 

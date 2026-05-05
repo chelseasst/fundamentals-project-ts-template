@@ -13,7 +13,6 @@ export const initLoginForm = () => {
         e.preventDefault();
         const email = emailInput.value;
         const password = passwordInput.value;
-        // Validate email
         if (!isValidEmail(email)) {
             errorBox.textContent = "Please enter a valid email address.";
             errorBox.classList.remove("hidden");
@@ -32,4 +31,16 @@ export const initLoginForm = () => {
             closeModal();
         }, 2000);
     });
+    initPasswordToggle();
 };
+function initPasswordToggle() {
+    const passwordInput = document.querySelector("#password");
+    const toggleIcon = document.querySelector(".toggle-password");
+    if (!passwordInput || !toggleIcon)
+        return;
+    toggleIcon.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+    });
+}
+;

@@ -100,7 +100,7 @@
   }
 }
 
-.product-desc-section {
+.product-details-section {
   margin-bottom: 2rem;
 
   .details-p {
@@ -153,46 +153,103 @@
   @include flex(column, null, null, 1rem);
 }
 
-.reviews-section .row {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
+
+.all-reviews {
+
+  #reviews-count {
+    font-weight: 700;
+    margin-bottom: 2rem
+  }
+
+  #reviews-holder {
+    @include flex(column, null, null, 1.5rem);
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+  .review {
+    @include flex(row, null, null, 1rem);
+    // border: 1px solid red;
+
+    .image img {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .content {
+      flex: 0 0 70%
+    }
+
+    .nameReview {
+      @include flex(row, null, space-between, null);
+
+      .name {
+        font-weight: 700;
+
+        span {
+          font-weight: 400;
+          color: $color-grey-dark;
+          font-size: 0.8rem
+        }
+      }
+    }
+  }
 }
 
-.reviews-section .row input {
-  flex: 1;
+
+.write-review {
+  .row {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    input {
+      flex: 1;
+    }
+  }
+
+  .checkbox-row {
+    color: $color-grey-dark;
+    font-size: 0.8rem;
+  }
+
+  #review-message {
+    height: 100px;
+  }
+
+  .checkbox-row input[type="checkbox"] {
+    height: 1rem;
+    margin-right: 0.5rem;
+    flex: 0;
+  }
+
+  .stars i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $color-grey-dark;
+    transition: color 0.2s;
+  }
+
+  .stars i.filled {
+    color: gold;
+  }
+
+  #submit-review,
+  #rate-title {
+    text-transform: uppercase;
+  }
 }
 
-.checkbox-row {
-  color: $color-grey-dark;
-  font-size: 0.8rem;
+.not-found {
+  @include flex(column, null, null, 1rem);
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+
 }
 
-#review-message {
-  height: 100px;
-}
-
-.checkbox-row input[type="checkbox"] {
-  height: 1rem;
-  margin-right: 0.5rem;
-  flex: 0;
-}
-
-.stars i {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: $color-grey-dark;
-  transition: color 0.2s;
-}
-
-.stars i.filled {
-  color: gold;
-}
-
-#submit-review,
-#rate-title {
-  text-transform: uppercase;
-}
 
 @media (width >=768px) {
   #main-product-details {
@@ -200,6 +257,7 @@
   }
 
   .product-info-section {
+    margin-bottom: 4rem;
     @include flex(row, null, space-between, 1rem);
 
     .product-gallery {
@@ -211,10 +269,21 @@
     }
   }
 
-  .product-desc-section {
+  .product-details-section {
+    margin-bottom: 4rem;
+
     .navigator {
-      @include flex(row, baseline, center, 1rem);
+      @include flex(row, baseline, center, 2rem);
+      margin-bottom: 2rem;
     }
+  }
+
+  .reviews-section {
+    @include flex(row, null, null, 2rem);
+  }
+
+  .all-reviews {
+    flex: 0 0 50%;
   }
 }
 
@@ -239,7 +308,19 @@
     }
   }
 
-  #review-message {
-    height: 300px;
+  .product-details-section {
+    .navigator {
+      @include flex(row, baseline, center, 8rem);
+    }
+  }
+
+  .reviews-section {
+    @include flex(row, null, null, 3rem);
+  }
+
+  .write-review {
+    #review-message {
+      height: 200px;
+    }
   }
 }

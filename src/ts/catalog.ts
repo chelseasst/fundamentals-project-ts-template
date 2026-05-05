@@ -1,5 +1,6 @@
 import { loadProducts } from "./data.js";
 import type { Product } from "./product.js";
+import { renderStars } from "./rating-stars.js";
 import { setupAddToCartButtons } from "./cart-ui.js";
 
 let allProducts: Product[] = [];
@@ -30,10 +31,8 @@ function renderCatalog() {
 
   const productsToShow = filteredProducts.slice(start, end);
 
-  // Update results text
   resultsText.textContent = `Showing ${start + 1}-${Math.min(end, filteredProducts.length)} of ${filteredProducts.length} Results`;
 
-  // Render products
   container.innerHTML = productsToShow
     .map(
       (p) => `
@@ -88,15 +87,6 @@ function renderTopRandomSets() {
   });
 }
 
-function renderStars(rating: number) {
-  const full = Math.floor(rating);
-  const empty = 5 - full;
-
-  return (
-    `<span>${'<i class="fa-solid fa-star"></i>'.repeat(full)}</span>` +
-    `<span>${'<i class="fa-regular fa-star"></i>'.repeat(empty)}</span>`
-  );
-}
 
 function setupSorting() {
   const sortSelect = document.getElementById("catalog-sort-select") as HTMLSelectElement;
@@ -209,9 +199,6 @@ function setupCatalogSearch() {
     renderPagination();
   });
 }
-
-
-
 
 function scrollToCatalogTop() {
   const catalog = document.getElementById("main-catalog");
