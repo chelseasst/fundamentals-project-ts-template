@@ -1,10 +1,6 @@
 @use '../base/fonts' as *;
 @use '../abstracts/mixins' as *;
 
-#main-contact {
-    // padding: 4rem 2rem;
-}
-
 .contact-landing-section {
     background-image: linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)), url("./assets/contact/contact-landing.jpg");
     background-size: cover;

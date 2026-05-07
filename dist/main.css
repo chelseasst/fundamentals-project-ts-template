@@ -490,11 +490,9 @@ label span {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-  }
-  .offer-percent {
     flex: 0 0 calc(50% - 2.5rem);
   }
-  .offer-content {
+  .offer-percent {
     flex: 0 0 calc(50% - 2.5rem);
   }
   .percent {
@@ -1888,12 +1886,12 @@ textarea.invalid {
   .cart-item img {
     width: 120px;
   }
+  .cart-item .cart-qty {
+    gap: 1.5rem;
+  }
   .cart-header > div,
   .cart-item > * {
     padding: 0.5rem;
-  }
-  .cart-item .cart-qty {
-    gap: 1.5rem;
   }
   .total-div {
     width: 400px;

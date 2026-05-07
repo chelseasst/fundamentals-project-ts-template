@@ -4,7 +4,8 @@ export function initCartPage() {
     setupCheckout();
 }
 export function getCart() {
-    return JSON.parse(localStorage.getItem("cart") || "[]");
+    var _a;
+    return JSON.parse((_a = localStorage.getItem("cart")) !== null && _a !== void 0 ? _a : "[]");
 }
 export function saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));

@@ -74,16 +74,13 @@
 
     .offer-content {
         @include flex(column, null, null, 2rem);
+        flex: 0 0 calc(50% - 2.5rem)
     }
 
     .offer-percent {
         flex: 0 0 calc(50% - 2.5rem)
     }
-
-    .offer-content {
-        flex: 0 0 calc(50% - 2.5rem)
-    }
-
+    
     .percent {
         font-size: 223px;
     }

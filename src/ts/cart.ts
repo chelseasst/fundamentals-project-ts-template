@@ -15,7 +15,7 @@ export function initCartPage() {
 }
 
 export function getCart(): CartItem[] {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
+  return JSON.parse(localStorage.getItem("cart") ?? "[]");
 }
 
 export function saveCart(cart: CartItem[]) {

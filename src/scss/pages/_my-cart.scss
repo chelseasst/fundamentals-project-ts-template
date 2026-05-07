@@ -103,7 +103,7 @@
     margin-top: 1rem;
 }
 
-@media (width >= 768px) {
+@media (width >=768px) {
     .cart-section {
         padding: 4rem 2.5rem;
     }
@@ -128,10 +128,14 @@
     }
 }
 
-@media (width >= 1024px) {
+@media (width >=1024px) {
     .cart-item {
         img {
             width: 120px;
+        }
+
+        .cart-qty {
+            gap: 1.5rem;
         }
     }
 
@@ -140,19 +144,13 @@
         padding: 0.5rem;
     }
 
-    .cart-item {
-        .cart-qty {
-            gap: 1.5rem;
-        }
-    }
-
     .total-div {
         width: 400px;
         padding: 2rem;
     }
 }
 
-@media (width >= 1440px) {
+@media (width >=1440px) {
     .cart-section {
         padding: 4rem 6rem;
     }
