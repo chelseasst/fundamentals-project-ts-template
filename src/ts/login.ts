@@ -48,7 +48,7 @@ export const initLoginForm = () => {
 
 function initPasswordToggle() {
     const passwordInput = document.querySelector("#password") as HTMLInputElement;
-    const toggleIcon = document.querySelector(".toggle-password") as HTMLElement;
+    const toggleIcon = document.querySelector(".toggle-password") as HTMLButtonElement;
 
     if (!passwordInput || !toggleIcon) return;
 

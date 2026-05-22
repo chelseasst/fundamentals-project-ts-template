@@ -1,6 +1,8 @@
-import "./modal.js";
-import { initLoginForm } from "./login.js";
-import { updateCartCounter } from "./cart.js";
+import "../scss/main.scss";
+import "./modal";
+import { initLoginForm } from "./login";
+import { updateCartCounter } from "./cart";
+
 
 initLoginForm();
 

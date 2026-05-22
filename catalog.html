@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <link rel="stylesheet" href="./dist/main.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -18,28 +17,28 @@
     <div class="heading">
       <div class="socials">
         <a href="https://facebook.com">
-          <img src="./dist/assets/icons/facebook.png" alt="Facebook" />
+          <img src="./src/assets/icons/facebook.png" alt="Facebook" />
         </a>
         <a href="https://twitter.com">
-          <img src="./dist/assets/icons/twitter.png" alt="Twitter" />
+          <img src="./src/assets/icons/twitter.png" alt="Twitter" />
         </a>
         <a href="https://instagram.com">
-          <img src="./dist/assets/icons/instagram.png" alt="Instagram" />
+          <img src="./src/assets/icons/instagram.png" alt="Instagram" />
         </a>
       </div>
       <div class="logo-div">
         <a class="header-logo" href="./index.html">
-          <img src="./dist/assets/icons/suitcase-logo.svg" alt="Best SHOP logo" />
+          <img src="./src/assets/icons/suitcase-logo.svg" alt="Best SHOP logo" />
           <span>Best SHOP</span>
         </a>
       </div>
       <div class="profile">
-        <button class="profile-icon">
-          <img src="./dist/assets/icons/user.svg" alt="User Icon" />
+        <button class="profile-icon" aria-label="Open login window">
+          <img src="./src/assets/icons/user.svg" alt="" aria-hidden="true">
         </button>
-        <a href="./cart.html" class="cart-icon">
-          <span id="cart-counter">2</span>
-          <img src="./dist/assets/icons/shopping-cart.svg" alt="Cart Icon">
+        <a href="./cart.html" class="cart-icon" aria-label="Shopping cart">
+          <span id="cart-counter" aria-live="polite"></span>
+          <img src="./src/assets/icons/shopping-cart.svg" alt="" aria-hidden="true">
         </a>
       </div>
     </div>
@@ -49,7 +48,7 @@
       <div class="header-dropdown">
         <a class="header-dropdown-link" href="./catalog.html">
           Catalog
-          <img src="./dist/assets/icons/arrow.svg" alt="arrow" class="nav-arrow" />
+          <img src="./src/assets/icons/arrow.svg" alt="" class="nav-arrow" aria-hidden="true" />
         </a>
         <div class="header-dropdown-menu">
           <a href="./catalog.html?category=all">All</a>
@@ -64,9 +63,9 @@
   </header>
 
   <main id="main-catalog">
-    <section class="catalog-actions">
+    <section class="catalog-actions" aria-label="Catalog Actions">
       <div class="wrapper">
-        <p id="catalog-results-text" class="catalog-results-text"></p>
+        <p id="catalog-results-text" class="catalog-results-text" aria-live="polite"></p>
         <div class="catalog-sort">
           <select id="catalog-sort-select" name="catalog-sort">
             <option value="default" selected>Default Sorting</option>
@@ -77,52 +76,48 @@
           </select>
         </div>
       </div>
-      <form class="search-models-form" action="#" method="get">
+      <form class="search-models-form" action="#" method="get" role="search">
         <input id="catalog-search-input" name="search" type="search" placeholder="Search Models" />
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
       </form>
     </section>
     <section class="items-section">
       <div class="catalog">
-        <div class="catalog-items text-center" id="catalog-products-container">
-          <!-- PRODUCTS -->
-        </div>
+        <div class="catalog-items text-center" id="catalog-products-container"></div>
         <div class="catalog-navigator">
-          <div class="pages" id="catalog-pages">
-            <!-- PAGES COUNT -->
-          </div>
+          <div class="pages" id="catalog-pages"></div>
           <span id="next">Next <i class="fa-solid fa-angle-right"></i></span>
         </div>
       </div>
       <div class="top-sets">
         <p class="title">Top Best Sets</p>
-        <div class="top-sets-list" id="top-sets-list">
-          <!-- TOP PICKS -->
-        </div>
+        <div class="top-sets-list" id="top-sets-list"></div>
       </div>
     </section>
   </main>
 
   <div class="login-modal-overlay hidden">
-    <div class="modal">
-      <button class="close-btn">✕</button>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <button class="close-btn" aria-label="Close login window">✕</button>
 
-      <h2 class="title-2 text-center">Log In</h2>
+      <h2 class="title-2 text-center" id="login-title">Log In</h2>
 
       <form id="login-form">
-        <label>Email address <span>*</span></label>
-        <input type="email" id="email" required>
+        <label for="email">Email address <span>*</span></label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Password <span>*</span></label>
+        <label for="password">Password <span>*</span></label>
         <div class="password-wrapper">
-          <input type="password" id="password" required>
-          <i class="fa-regular fa-eye toggle-password"></i>
+          <input type="password" id="password" name="password" required>
+          <button type="button" class="toggle-password" aria-label="Show password">
+            <i class="fa-regular fa-eye" aria-hidden="true"></i>
+          </button>
         </div>
-        <p class="login-error hidden"></p>
+        <p class="login-error hidden" aria-live="polite"></p>
         <p class="login-success hidden">Login successful!</p>
         <div class="login-options">
           <div class="remember-me">
-            <input type="checkbox" id="remember">
+            <input type="checkbox" id="remember" name="remember">
             <label for="remember">Remember me</label>
           </div>
           <div class="forgot-password">
@@ -143,101 +138,103 @@
   <footer>
     <div class="our-benefits-back">
       <div class="our-benefits">
-        <p class="title">Our Benefits</p>
-        <div class="benefits-container">
-          <div class="benefit">
-            <img src="./dist/assets/icons/benefit-global.png" alt="">
+        <h3 class="title-3">Our Benefits</h3>
+        <ul class="benefits-list">
+          <li class="benefit">
+            <img src="./src/assets/icons/benefit-global.png" alt="">
             <p>Velit nisl sodales eget donec quis. volutpat orci.</p>
-          </div>
-          <div class="benefit">
-            <img src="./dist/assets/icons/benefit-transport.png" alt="">
+          </li>
+          <li class="benefit">
+            <img src="./src/assets/icons/benefit-transport.png" alt="">
             <p>Dolor eu varius. Morbi fermentum velit nisl.</p>
-          </div>
-          <div class="benefit">
-            <img src="./dist/assets/icons/benefit-finance.png" alt="">
+          </li>
+          <li class="benefit">
+            <img src="./src/assets/icons/benefit-finance.png" alt="">
             <p>Malesuada fames ac ante ipsum primis in faucibus.</p>
-          </div>
-          <div class="benefit">
-            <img src="./dist/assets/icons/benefit-education.png" alt="">
-            <p>Nisl sodales eget donec quis. volutpat orci. </p>
-          </div>
-        </div>
+          </li>
+          <li class="benefit">
+            <img src="./src/assets/icons/benefit-education.png" alt="">
+            <p>Nisl sodales eget donec quis. volutpat orci.</p>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="footer-content">
-      <div class="categories">
-        <ul class="about">
-          <li>
+      <nav class="categories" aria-label="Footer navigation">
+        <div class="about">
+          <h4 class="title-4">
             <a href="./about.html">
-              <p>About Us</p>
+              About Us
             </a>
-          </li>
-          <li>Organisation</li>
-          <li>Partners</li>
-          <li>Clients</li>
-        </ul>
-        <ul class="links">
-          <li>
-            <p>Interesting Links</p>
-          </li>
-          <li>Photo Gallery</li>
-          <li>Our Team</li>
-          <li>Socials</li>
-        </ul>
-        <ul class="achievements">
-          <li>
-            <p>Achievements</p>
-          </li>
-          <li>Winning Awards</li>
-          <li>Press</li>
-          <li>Our Amazing CLients</li>
-        </ul>
-        <ul class="shipping">
-          <li>
-            <p>Shipping Information</p>
-          </li>
-          <li>Nulla eleifend pulvinar purus, molestie euismod odio imperdiet ac. Ut sit amet erat nec nibh
-            rhoncus varius in non lorem. Donec interdum, lectus in convallis pulvinar, enim elit porta
-            sapien, vel finibus erat felis sed neque. Etiam aliquet neque sagittis erat tincidunt
-            aliquam. </li>
-        </ul>
-      </div>
-      <div class="contact-us">
-        <a href="./contact.html">
-          <p class="title">Contanct Us</p>
-        </a>
+          </h4>
+          <ul>
+            <li>Organisation</li>
+            <li>Partners</li>
+            <li>Clients</li>
+          </ul>
+        </div>
+        <div class="interesting-links">
+          <h4 class="title-4">Interesting Links</h4>
+          <ul>
+            <li>Photo Gallery</li>
+            <li>Our Team</li>
+            <li>Socials</li>
+          </ul>
+        </div>
+        <div class="achievements">
+          <h4 class="title-4">Achievements</h4>
+          <ul>
+            <li>Winning Awards</li>
+            <li>Press</li>
+            <li>Our Amazing Clients</li>
+          </ul>
+        </div>
+        <div class="shipping-info">
+          <h4 class="title-4">Shipping Information</h4>
+          <ul>
+            <li>Nulla eleifend pulvinar purus, molestie euismod odio imperdiet ac. Ut sit amet erat nec nibh
+              rhoncus varius in non lorem. Donec interdum, lectus in convallis pulvinar, enim elit porta
+              sapien, vel finibus erat felis sed neque. Etiam aliquet neque sagittis erat tincidunt
+              aliquam. </li>
+          </ul>
+        </div>
+      </nav>
+      <section class="contact-us">
+        <h4 class="title-4">
+          <a href="./contact.html">Contact Us</a>
+        </h4>
         <p class="expl">Bendum dolor eu varius. Morbi fermentum velitsodales egetonec. volutpat orci. Sed
           ipsum felis, tristique egestas et, convallis ac velitn consequat nec luctus.</p>
-        <div class="contacts">
+        <address class="contacts">
           <div>
-            <i class="fa-solid fa-phone"></i>
-            <p> Phone: (+63) 236 6322 </p>
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            <a href="tel:+632366322"> Phone: (+63) 236 6322 </a>
           </div>
           <div>
-            <i class="fa-solid fa-envelope"></i>
-            <p>public@news.com</p>
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:public@news.com">public@news.com</a>
           </div>
           <div id="hours">
-            <i class="fa-solid fa-clock"></i>
+            <i class="fa-solid fa-clock" aria-hidden="true"></i>
             <div>
               <p>Mon - Fri: 10am - 6pm</p>
               <p>Sat - Sun: 10am - 6pm</p>
             </div>
           </div>
           <div>
-            <i class="fa-solid fa-location-dot"></i>
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
             <p>639 Jade Valley, Washington Dc</p>
           </div>
-        </div>
-      </div>
+        </address>
+      </section>
     </div>
     <div class="footer-copyright">
-      <p>© Copyright 2025</p>
+      <p>&copy; Copyright 2025</p>
     </div>
   </footer>
 
-  <script type="module" src="./dist/js/main.js"></script>
-  <script type="module" src="./dist/js/catalog.js"></script>
+  <script type="module" src="./src/ts/main.ts"></script>
+  <script type="module" src="./src/ts/catalog.ts"></script>
 </body>
 
 </html>

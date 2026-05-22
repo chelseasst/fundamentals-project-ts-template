@@ -12,7 +12,7 @@
 
     margin: 0 auto;
     color: $color-white;
-    background: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 70%)), url('./assets/offer-back.png'); // your image path
+    background: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 70%)), url('../../assets/offer-back.png'); // your image path
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,7 +40,7 @@
     position: relative;
 }
 
-@media (width >= 768px) {
+@media (width >=768px) {
     .offer-month-section {
         padding: 4rem 2.5rem;
     }
@@ -58,7 +58,7 @@
     }
 }
 
-@media (width >= 1440px) {
+@media (width >=1440px) {
     .offer-month-section {
         padding: 4rem 6rem;
     }
@@ -80,12 +80,12 @@
     .offer-percent {
         flex: 0 0 calc(50% - 2.5rem)
     }
-    
+
     .percent {
         font-size: 223px;
     }
 
     .percent-desc {
-        top: -3.5rem;
+        top: -3rem;
     }
 }

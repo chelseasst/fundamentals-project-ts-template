@@ -19,14 +19,16 @@
     .customer {
         flex: 0 0 90%;
 
-        @include flex(column, center, null, 1rem);
+        .customer-figure {
+            @include flex(column, center, null, 1rem);
 
-        padding: 1rem;
-        box-shadow: 0 0 10px 3px rgb(75 75 75 / 20%);
+            padding: 1rem;
+            box-shadow: 0 0 10px 3px rgb(75 75 75 / 20%);
 
-        .name-city {
-            color: $color-high;
-            font-weight: 700;
+            .name-city {
+                color: $color-high;
+                font-weight: 700;
+            }
         }
     }
 }
@@ -35,7 +37,7 @@
     display: none;
 }
 
-@media (width >= 768px) {
+@media (width >=768px) {
     .home-grateful-customers-section {
         padding: 4rem 2.5rem;
     }
@@ -47,7 +49,7 @@
     }
 }
 
-@media (width >= 1440px) {
+@media (width >=1440px) {
     .home-grateful-customers-section {
         padding: 4rem 6rem;
     }
@@ -55,7 +57,10 @@
     .customers-slider {
         .customer {
             flex: 0 0 33%;
-            padding: 2rem;
+
+            .customer-figure {
+                padding: 2rem;
+            }
         }
     }
 }

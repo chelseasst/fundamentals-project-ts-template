@@ -4,7 +4,10 @@
 .categories-section {
     padding: 4rem 2rem;
 
-    @include flex(column, null, null, 2rem);
+    .categories-list {
+        @include flex(column, null, null, 2rem);
+    }
+
 
     .category {
         flex: 1;
@@ -26,16 +29,18 @@
     }
 }
 
-@media (width >= 768px) {
+@media (width >=768px) {
     .categories-section {
         padding: 4rem 2.5rem;
 
-        @include flex(row, baseline, space-between, 2rem);
+        .categories-list {
+            @include flex(row, baseline, space-between, 2rem);
+        }
     }
 
 }
 
-@media (width >= 1440px) {
+@media (width >=1440px) {
     .categories-section {
         padding: 4rem 6rem;
     }

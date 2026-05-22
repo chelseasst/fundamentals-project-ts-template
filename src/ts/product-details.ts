@@ -70,10 +70,10 @@ function renderYouMayLike(products: Product[], current: Product) {
   container.innerHTML = suggestions
     .map(
       p => `
-      <div class="product">
+      <article class="product">
         <a href="product-details.html?id=${p.id}" class="product-link">
           <div class="image-cont">
-            <img src="${p.imageUrl}" alt="${p.name}">
+            <img src="${p.imageUrl}" alt="">
             ${p.salesStatus ? `<span class="sale">Sale</span>` : ""}
           </div>
           <div class="desc">
@@ -81,8 +81,8 @@ function renderYouMayLike(products: Product[], current: Product) {
             <span class="price">$${p.price}</span>
           </div>
         </a>
-        <button class="btn add-to-cart" data-id="${p.id}">Add To Cart</button>
-      </div>
+        <button class="btn add-to-cart" data-id="${p.id}" aria-label="Add ${p.name} to cart">Add To Cart</button>
+      </article>
     `
     )
     .join("");
@@ -158,7 +158,7 @@ const detailsHTML = `
 `;
 
 const reviewsHTML = `
-  <div class="reviews-section">
+  <div class="reviews-section" aria-labelledby="title-4">
 
      <div class="all-reviews">
         <p id="reviews-count"></p>
@@ -166,11 +166,10 @@ const reviewsHTML = `
      </div>
 
      <div class="write-review">
-        <h4>Add Review</h4>
+        <h4 id="title-4">Add Review</h4>
         <p>Your email address won't be shared with anybody. Required fields have the symbol *</p>
    
-        <form id="review-form">
-
+  <form id="review-form">
      <div class="row">
       <label id="rate-title">RATE PRODUCT</label>
       <div class="stars" id="review-stars">
@@ -341,7 +340,7 @@ export function renderReviews(productId: string) {
     .map(r => `
       <div class="review">
         <div class="image">
-          <img src="./dist/assets/team-person-1.png" />
+          <img src="./dist/assets/team-person-1.png" alt=""/>
         </div>
         <div class="content">
           <div class="nameReview">

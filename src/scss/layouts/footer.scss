@@ -11,16 +11,13 @@
 .footer-copyright {
   padding: 2rem;
 
-  p,
   li,
-  a {
+  p {
     font-size: 0.9rem;
   }
 
-  li:nth-child(1),
-  .title {
-    padding-bottom: 0.5rem;
-    font-weight: 700;
+  .title-4 {
+    padding-bottom: 1rem;
 
     &:hover {
       cursor: pointer;
@@ -32,12 +29,12 @@
 .our-benefits {
   color: $color-white;
 
-  .title {
+  .title-3 {
     padding-bottom: 1.5rem;
   }
 }
 
-.benefits-container {
+.benefits-list {
   @include flex(column, center, center, 1.5rem);
 
   .benefit {
@@ -82,19 +79,20 @@
 
 .footer-copyright {
   p {
-    color: rgb(0 0 0.35);
+    color: rgba(0,0,0,.35);
     text-align: center;
   }
 }
 
 @media (width >=768px) {
+
   .our-benefits,
   .footer-content,
   .footer-copyright {
     padding: 2.5rem;
   }
 
-  .benefits-container {
+  .benefits-list {
     @include flex(row, center, center, 1.5rem);
   }
 
@@ -106,7 +104,7 @@
       grid-area: about;
     }
 
-    .links {
+    .interesting-links {
       grid-area: links;
     }
 
@@ -114,7 +112,7 @@
       grid-area: achievements;
     }
 
-    .shipping {
+    .shipping-info {
       grid-area: shipping;
     }
 
@@ -129,13 +127,14 @@
 }
 
 @media (width >=1440px) {
+
   .our-benefits,
   .footer-content,
   .footer-copyright {
     padding: 4rem 6rem;
   }
 
-  .benefits-container {
+  .benefits-list {
     img {
       width: 60px;
     }

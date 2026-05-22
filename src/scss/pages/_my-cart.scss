@@ -2,7 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 .cart-landing-section {
-    background-image: linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)), url("./assets/cart-landing.jpg");
+    background-image: linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 40%)), url("../../assets/cart-landing.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES6",
+    "types": [
+      "node"
+    ],
     "lib": [
       "es2016",
       "dom",

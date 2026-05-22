@@ -36,8 +36,8 @@ function renderCatalog() {
   container.innerHTML = productsToShow
     .map(
       (p) => `
-   <div class="product">
-        <a href="product-details.html?id=${p.id}" class="product-link">
+   <article class="product">
+        <a href="product-details.html?id=${p.id}" class="product-link" aria-label="View details for ${p.name}">
           <div class="image-cont">
             <img src="${p.imageUrl}" alt="${p.name}">
             ${p.salesStatus ? `<span class="sale">Sale</span>` : ""}
@@ -47,8 +47,8 @@ function renderCatalog() {
             <span class="price">$${p.price}</span>
           </div>
         </a>
-        <button class="btn add-to-cart" data-id="${p.id}">Add To Cart</button>
-      </div>
+        <button class="btn add-to-cart" data-id="${p.id}" aria-label="Add ${p.name} to cart">Add To Cart</button>
+      </article>
         `
     )
     .join("");
@@ -65,7 +65,7 @@ function renderTopRandomSets() {
     .map(
       p => `
       <div class="top-item" data-id="${p.id}">
-        <img src="${p.imageUrl}" alt="${p.name}" />
+        <img src="${p.imageUrl}" alt="" />
         <div class="top-item-details">
           <p class="type">${p.name}</p>
           <div class="stars-review">
