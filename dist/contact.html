@@ -11,6 +11,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <script type="module" crossorigin src="/assets/contact-DzfhmrMX.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/main-2gHV1bjf.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-D7YH224_.css">
 </head>
 
 <body>
@@ -29,7 +32,7 @@
             </div>
             <div class="logo-div">
                 <a class="header-logo" href="./index.html">
-                    <img src="./assets/icons/suitcase-logo.svg" alt="Best SHOP logo" />
+                    <img src="/assets/icons/suitcase-logo.svg" alt="Best SHOP logo" />
                     <span>Best SHOP</span>
                 </a>
             </div>
@@ -63,96 +66,66 @@
         </nav>
     </header>
 
-    <main id="main-about">
-        <section class="about-landing-section text-center">
+    <main id="main-contact">
+        <section class="contact-landing-section text-center">
             <h1 class="title-1">
-                About Us
+                Contact Us
             </h1>
             <p>Duis vestibulum elit vel neque pharetra vulputate.</p>
             <p>Duis rutrum non risus in imperdiet.</p>
-
         </section>
-        <section class="categories-section" aria-label="Our advantages">
+        <section class="categories-section" aria-label="Our contacts">
             <ul class="categories-list text-center">
                 <li class="category">
-                    <img src="/assets/icons/accuracy.png" alt="">
-                    <p class="title">Superior Accuracy</p>
-                    <p class="desc">Qewist vestibulum elit vel
-                        neque pharetra vulputate
-                        scelerisque nisi urna.</p>
+                    <img src="/assets/icons/location.png" alt="">
+                    <p class="title">Our Location</p>
+                    <p class="desc">1234 NW Bobcat Lane, St.
+                        Robert, MO 65584-5678</p>
                 </li>
                 <li class="category">
-                    <img src="/assets/icons/awards.png" alt="">
-                    <p class="title">Awards</p>
-                    <p class="desc">Vestibulum elit vel neque
-                        pharetra vulputate. Quisque
-                        scelerisque nisi urna.</p>
+                    <img src="/assets/icons/time.png" alt="">
+                    <p class="title">Operating Time</p>
+                    <p class="desc">Monday - Friday: 9am - 6 pm
+                        Weekends: 10:30 am - 6pm</p>
                 </li>
                 <li class="category">
-                    <img src="/assets/icons/ecological.png" alt="">
-                    <p class="title">Ecological</p>
-                    <p class="desc">Elit vel neque duis vestibulum
-                        pharetra vulputateuisque
-                        scelerisque nisi urna.</p>
+                    <img src="/assets/icons/email.png" alt="">
+                    <p class="title">Our Email</p>
+                    <p class="desc">best@shop.com
+                        info@bestshop.com</p>
                 </li>
                 <li class="category">
-                    <img src="/assets/icons/worldwide.png" alt="">
-                    <p class="title">Shipping Worldwide</p>
-                    <p class="desc">Quisque scelerisque nisi urna.
-                        Duis vestibulum elit vel neque
-                        pharetra vulputate. </p>
+                    <img src="/assets/icons/phone.png" alt="">
+                    <p class="title">Call Us</p>
+                    <p class="desc">(268)142-8413
+                        (760)265-2917</p>
                 </li>
             </ul>
         </section>
-        <section class="new-arrivals-section">
-            <div class="text">
-                <h2 class="title-2">New Arrivals Every Week</h2>
-                <p>Duis vestibulum elit vel neque pharetra vulputate. Quisque scelerisque nisi
-                    urna. Duis rutrum non risus in imperdiet. Proin molestie accumsan nulla sit.
-                    Quisque scelerisque nisi urnauis rutrum.</p>
-                <p>Vitrumuis vestibulum elit vel neque pharetra vulputate. Quisque scelerisque
-                    nisi urna. Duis vestibulum elit vel neque pharetra vulputateuisque
-                    scelerisque nisi urna.</p>
-                <a href="./catalog.html" class="btn">See All Models</a>
-            </div>
+        <section class="feedback-section" aria-labell="Feedback section">
             <div class="image">
-                <img src="/assets/new-arrivals.jpg" alt="Suitcase landscape">
+                <img src="/assets/suitcase-inside.jpg" alt="">
             </div>
-        </section>
-        <section class="our-team-section">
-            <h2 class="title-2 text-center">Our Incredible Team</h2>
-            <div class="team-slider text-center">
-                <div class="person">
-                    <img src="/assets/team-person-1.png" alt="Photo of Natalia Foster">
-                    <p class="name">Natalia Foster</p>
-                    <p class="position">Product Manager</p>
+            <div class="feedback">
+                <div>
+                    <h4 class="title-4">Your Feedback is Much Appreciated!</h4>
+                    <p class="exp">We will contact you when you complete the following form!</p>
                 </div>
-                <div class="person">
-                    <img src="/assets/team-person-2.png" alt="Photo of Alexandra Thompson">
-                    <p class="name">Alexandra Thompson</p>
-                    <p class="position">Graphic Designer</p>
-                </div>
-                <div class="person">
-                    <img src="/assets/team-person-3.png" alt="Photo of Iryna Brooks">
-                    <p class="name">Iryna Brooks</p>
-                    <p class="position">Head Of Marketing</p>
-                </div>
+                <form action="" id="feedback-form">
+                    <label for="name">Your Name <span aria-hidden="true">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="emailAddress">Your Email Address <span aria-hidden="true">*</span></label>
+                    <input type="email" id="emailAddress" name="emailAddress" required>
+                    <label for="topic">Topic</label>
+                    <input type="text" id="topic" name="topic" required>
+                    <label for="message">Your Message <span aria-hidden="true">*</span></label>
+                    <textarea name="message" id="message" name="message" required></textarea>
 
-            </div>
-        </section>
-        <section class="offer-month-section">
-            <div class="offer-banner">
-                <div class="offer-percent">
-                    <span class="percent text-center">50%</span>
-                    <p class="percent-desc text-center">Curabitur vulputate arcu odio, ac facilisis diam.</p>
-                </div>
-                <div class="offer-content">
-                    <h2 class="title-2">Offer Of The Month</h2>
-                    <p>Curabitur vulputate arcu odio, ac facilisis diam accumsan ut. Ut imperdiet et leo in
-                        vulputate.
-                    </p>
-                    <button class="btn">Get Offer Today</button>
-                </div>
+                    <p id="feedback-error" class="error hidden" aria-live="polite"></p>
+                    <p id="feedback-success" class="success hidden">Message sent successfully!</p>
+
+                    <button type="submit" class="btn">SEND</button>
+                </form>
             </div>
         </section>
     </main>
@@ -288,7 +261,6 @@
         </div>
     </footer>
 
-    <script type="module" src="./src/ts/main.ts"></script>
 </body>
 
 </html>

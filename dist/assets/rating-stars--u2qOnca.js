@@ -1,0 +1,1 @@
+import{o as e}from"./main-2gHV1bjf.js";function t(e){let t=Math.floor(e),n=5-t;return`<span><i class="fa-solid fa-star"></i></span>`.repeat(t)+`<span><i class="fa-regular fa-star"></i></span>`.repeat(n)}var n=e((()=>{}));export{t as n,n as t};

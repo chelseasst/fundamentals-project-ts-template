@@ -9,8 +9,8 @@ let filteredProducts: Product[] = [];
 let currentPage = 1;
 const itemsPerPage = 12;
 
-async function initCatalog() {
-  allProducts = await loadProducts();
+function initCatalog() {
+  allProducts =  loadProducts();
   filteredProducts = [...allProducts];
 
   renderCatalog();

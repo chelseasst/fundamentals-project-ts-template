@@ -2,8 +2,8 @@ import { loadProducts } from "./data.js";
 import type { Product } from "./product.js";
 import { setupAddToCartButtons } from "./cart-ui.js";
 
-async function initHomePage() {
-    const products = await loadProducts();
+function initHomePage() {
+    const products = loadProducts();
 
     renderSelectedProducts(products);
     renderNewProducts(products);

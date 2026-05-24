@@ -1,5 +1,6 @@
-export async function loadProducts() {
-    const response = await fetch("./dist/assets/data.json");
-    const json = await response.json();
-    return json.data; //an array of products
+import products from "../data/data.json";
+import { Product } from "./product";
+
+export function loadProducts() {
+    return products.data as Product[];
 }
